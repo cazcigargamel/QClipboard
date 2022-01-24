@@ -6,6 +6,15 @@
 #include <QMenu>
 #include <QToolBar>
 #include <QPixmap>
+#include <QTimer>
+#include <QDebug>
+#include <QStringListModel>
+#include <QList>
+#include <QFile>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QListView>
 
 class MainWindow : public QMainWindow
 {
@@ -29,6 +38,24 @@ private:
 
     QToolBar *toolBar = nullptr;
 
+    QTimer m_timer;
+    QString m_last;
+    QStringListModel m_model;
+    QStringList m_list;
+    QString m_path;
+    bool m_changed;
 
+    void init();
+    void checkedSaved();
+
+    QListView *listView;
+    // QWidget interface
+
+private slots:
+    void timeout();
+    void handleNew();
+    void handleOpen();
+protected:
+    void closeEvent(QCloseEvent *event) override;
 };
 #endif // MAINWINDOW_H
