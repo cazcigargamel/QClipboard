@@ -15,7 +15,9 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QListView>
-
+#include <QStatusBar>
+#include <QApplication>
+#include <QClipboard>
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -31,7 +33,7 @@ private:
     QAction *saveAsAction = nullptr;
     QAction *startAction = nullptr;
     QAction *stopAction = nullptr;
-    QAction *copyAsAction = nullptr;
+    QAction *copyAction = nullptr;
     QAction *cutAction = nullptr;
     QAction *pasteAction = nullptr;
     QAction *deleteAction = nullptr;
@@ -49,12 +51,21 @@ private:
     void checkedSaved();
 
     QListView *listView;
+    QStatusBar *statusBar;
     // QWidget interface
 
 private slots:
     void timeout();
     void handleNew();
     void handleOpen();
+    void handleSave();
+    void handleSaveAs();
+    void handleStart();
+    void handleStop();
+    void handleCopy();
+    void handleCut();
+    void handlePaste();
+    void handleDelete();
 protected:
     void closeEvent(QCloseEvent *event) override;
 };
